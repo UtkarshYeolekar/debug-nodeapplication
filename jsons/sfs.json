@@ -1,0 +1,41 @@
+{  
+   "apiVersion":"apps/v1beta1",
+   "kind":"StatefulSet",
+   "metadata":{  
+      "namespace":"node-demo",
+      "name":"nodeapp"
+   },
+   "spec":{  
+      "serviceName":"nodeapp",
+      "replicas":1,
+      "template":{  
+         "metadata":{  
+            "labels":{  
+               "app":"demo",
+               "tier":"server"
+            }
+         },
+         "spec":{ 
+			"terminationGracePeriodSeconds": 10,		 
+            "containers":[  
+               {  
+                  "name":"nodeapp",
+                  "image":"utkarshyeo/nodedebug:demo",
+                  "env":[  
+					 {  
+                        "name":"TIER",
+                        "value":"engine"
+                     }
+                  ],
+                  "ports":[  
+                     {  
+                        "name":"web",
+                        "containerPort":3000
+                     }
+                  ]
+               }
+            ]
+         }
+      }
+   }
+}
